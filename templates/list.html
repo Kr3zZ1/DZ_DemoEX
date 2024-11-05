@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список Паспортов</title>
+</head>
+<body>
+    <h1>Список Паспортных Данных</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Серия</th>
+            <th>Номер</th>
+            <th>Действия</th>
+        </tr>
+        {% for passport in passports %}
+        <tr>
+            <td>{{ passport.id }}</td>
+            <td>{{ passport.first_name }}</td>
+            <td>{{ passport.last_name }}</td>
+            <td>{{ passport.patronymic }}</td>
+            <td>{{ passport.passport_series }}</td>
+            <td>{{ passport.passport_number }}</td>
+            <td>
+                <a href="/update/{{ passport.id }}">Изменить</a> |
+                <form action="/delete/{{ passport.id }}" method="post" style="display:inline;">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/">Создать новый паспорт</a></p>
+</body>
+</html>
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить Паспорт</title>
+</head>
+<body>
+    <h1>Изменение Паспортных Данных</h1>
+    <form action="/update/{{ passport.id }}" method="post">
+        <label>Имя: <input type="text" name="first_name" value="{{ passport.first_name }}" required></label><br>
+        <label>Фамилия: <input type="text" name="last_name" value="{{ passport.last_name }}" required></label><br>
+        <label>Отчество: <input type="text" name="patronymic" value="{{ passport.patronymic }}" required></label><br>
+        <label>Серия паспорта: <input type="text" name="passport_series" value="{{ passport.passport_series }}" required></label><br>
+        <label>Номер паспорта: <input type="text" name="passport_number" value="{{ passport.passport_number }}" required></label><br>
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <form action="/delete/{{ passport.id }}" method="post">
+        <button type="submit">Удалить паспорт</button>
+    </form>
+    <p><a href="/list">Назад к списку паспортов</a></p>
+</body>
+</html>
+
+
