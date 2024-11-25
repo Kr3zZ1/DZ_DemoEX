@@ -2,20 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Создать Паспорт</title>
+    <title>Создать Заявку</title>
 </head>
 <body>
-    <h1>Создание Паспортных Данных</h1>
+    <h1>Создание Заявки</h1>
     <form action="/create" method="post">
-        <label>Имя: <input type="text" name="first_name" required></label><br>
-        <label>Фамилия: <input type="text" name="last_name" required></label><br>
-        <label>Отчество: <input type="text" name="patronymic" required></label><br>
-        <label>Серия паспорта: <input type="text" name="passport_series" required></label><br>
-        <label>Номер паспорта: <input type="text" name="passport_number" required></label><br>
+        <label>Оборудование: <input type="text" name="equipment" required></label><br>
+        <label>Тип неисправности: <input type="text" name="fault_type" required></label><br>
+        <label>Описание проблемы: <textarea name="description" required></textarea></label><br>
+        <label>Клиент: <input type="text" name="client" required></label><br>
         <button type="submit">Создать</button>
     </form>
-    <p><a href="/list">Список паспортов</a>
+    <p><a href="/list">Список заявок</a></p>
 </body>
 </html>
-
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика Заявок</title>
+</head>
+<body>
+    <h1>Статистика Заявок</h1>
+    <p>Количество выполненных заявок: {{ completed_count }}</p>
+    
+    <p>Среднее время выполнения заявки: 
+        {% if average_time > 0 %}
+            {{ average_time }} секунд
+        {% else %}
+            Данные недоступны
+        {% endif %}
+    </p>
+
+    <h2>Статистика по типам неисправностей:</h2>
+    <ul>
+        {% for fault_type, count in fault_types.items() %}
+        <li>{{ fault_type }}: {{ count }} заявок</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/list">Назад к списку заявок</a></p>
+</body>
+</html>

@@ -2,23 +2,44 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Изменить Паспорт</title>
+    <title>Изменить Заявку</title>
 </head>
 <body>
-    <h1>Изменение Паспортных Данных</h1>
-    <form action="/update/{{ passport.id }}" method="post">
-        <label>Имя: <input type="text" name="first_name" value="{{ passport.first_name }}" required></label><br>
-        <label>Фамилия: <input type="text" name="last_name" value="{{ passport.last_name }}" required></label><br>
-        <label>Отчество: <input type="text" name="patronymic" value="{{ passport.patronymic }}" required></label><br>
-        <label>Серия паспорта: <input type="text" name="passport_series" value="{{ passport.passport_series }}" required></label><br>
-        <label>Номер паспорта: <input type="text" name="passport_number" value="{{ passport.passport_number }}" required></label><br>
+    <h1>Изменение Заявки</h1>
+    <form action="/update/{{ service_request.id }}" method="post">
+        <label>Оборудование: <input type="text" name="equipment" value="{{ service_request.equipment }}" readonly></label><br>
+        <label>Тип неисправности: <input type="text" name="fault_type" value="{{ service_request.fault_type }}" readonly></label><br>
+        <label>Клиент: <input type="text" name="client" value="{{ service_request.client }}" readonly></label><br>
+        <label>Статус: 
+            <select name="status" required>
+                <option value="в ожидании" {% if service_request.status == "в ожидании" %}selected{% endif %}>В ожидании</option>
+                <option value="в работе" {% if service_request.status == "в работе" %}selected{% endif %}>В работе</option>
+                <option value="выполнено" {% if service_request.status == "выполнено" %}selected{% endif %}>Выполнено</option>
+            </select>
+        </label><br>
+        <label>Описание проблемы: <textarea name="description" required>{{ service_request.description }}</textarea></label><br>
+        <label>Ответственный: <input type="text" name="responsible" value="{{ service_request.responsible }}"></label><br>
         <button type="submit">Сохранить изменения</button>
     </form>
-    <form action="/delete/{{ passport.id }}" method="post">
-        <button type="submit">Удалить паспорт</button>
+
+    <h2>Комментарии:</h2>
+    <ul>
+        {% for comment in service_request.comments %}
+            <li>{{ comment.comment }} ({{ comment.date }})</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Форма для добавления нового комментария -->
+    <h3>Добавить новый комментарий:</h3>
+    <form action="/add_comment/{{ service_request.id }}" method="post">
+        <textarea name="comment" required></textarea><br>
+        <button type="submit">Добавить комментарий</button>
     </form>
-    <p><a href="/list">Назад к списку паспортов</a></p>
+
+    <form action="/delete/{{ service_request.id }}" method="post">
+        <button type="submit">Удалить заявку</button>
+    </form>
+
+    <p><a href="/list">Назад к списку заявок</a></p>
 </body>
 </html>
-
-

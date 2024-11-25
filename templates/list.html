@@ -2,38 +2,52 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Список Паспортов</title>
+    <title>Список Заявок</title>
 </head>
 <body>
-    <h1>Список Паспортных Данных</h1>
+    <h1>Список Заявок</h1>
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Отчество</th>
-            <th>Серия</th>
-            <th>Номер</th>
+            <th>Оборудование</th>
+            <th>Тип неисправности</th>
+            <th>Статус</th>
+            <th>Ответственный</th>
+            <th>Начало работ</th>
+            <th>Завершение работ</th>
+            <th>Комментарии</th>
             <th>Действия</th>
         </tr>
-        {% for passport in passports %}
+        {% for request in requests_db %}
         <tr>
-            <td>{{ passport.id }}</td>
-            <td>{{ passport.first_name }}</td>
-            <td>{{ passport.last_name }}</td>
-            <td>{{ passport.patronymic }}</td>
-            <td>{{ passport.passport_series }}</td>
-            <td>{{ passport.passport_number }}</td>
+            <td>{{ request.id }}</td>
+            <td>{{ request.equipment }}</td>
+            <td>{{ request.fault_type }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.responsible }}</td>
+            <td>{{ request.date_added }}</td>
             <td>
-                <a href="/update/{{ passport.id }}">Изменить</a> |
-                <form action="/delete/{{ passport.id }}" method="post" style="display:inline;">
+                {% if request.completion_time %}
+                    {{ request.completion_time }}
+                {% else %}
+                    Не завершено
+                {% endif %}
+            </td>
+            <td>
+                {% for comment in request.comments %}
+                    <p>{{ comment.comment }} ({{ comment.date }})</p>
+                {% endfor %}
+            </td>
+            <td>
+                <a href="/update/{{ request.id }}">Изменить</a> |
+                <form action="/delete/{{ request.id }}" method="post" style="display:inline;">
                     <button type="submit">Удалить</button>
                 </form>
             </td>
         </tr>
         {% endfor %}
     </table>
-    <p><a href="/">Создать новый паспорт</a></p>
+    <p><a href="/">Создать новую заявку</a></p>
+    <p><a href="/stats">Перейти к статистике</a></p>
 </body>
 </html>
-
